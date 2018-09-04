@@ -1,42 +1,104 @@
-$(function(){
-var ourRequest=new XMLHttpRequest();
-ourRequest.open('GET','file:///home/dev/rohit/ipl-rohit/problem1.json')
-ourRequest.onload =function(){
-    var data= ourRequest.responseText;
-    var year= Object.keys(data);
-    var matches=Object.values(data);
-}
-})
+var obj=[];
+$.get('../problem1.json',function(data){
 
-
-function renderChart(year,matches){Highcharts.chart('container', {
+ obj = Object.entries( data);
+Highcharts.chart('container', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Stacked column chart'
+        text: 'IPL Matches Per Year'
+    },
+    subtitle: {
+        text: 'Source: <a href="https://www.iplt20.com"/>IPL</a>'
     },
     xAxis: {
-        categories: year
+        type: 'category',
+        labels: {
+            rotation: -45,
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Total fruit consumption'
+            text: 'No. Of Matches'
         }
+    },
+    legend: {
+        enabled: false
     },
     tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-        shared: true
+        pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>'
     },
-    plotOptions: {
-        column: {
-            stacking: 'percent'
+    series: [{
+        name: 'Population',
+        data: obj,
+        dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            format: '{point.y:.1f}', // one decimal
+            y: 10, // 10 pixels down from the top
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    }]
+});
+
+});
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'World\'s largest cities per 2017'
+    },
+    subtitle: {
+        text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+    },
+    xAxis: {
+        type: 'category',
+        labels: {
+            rotation: -45,
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
         }
     },
-    series:[{
-        name:"MatchesPlayed",
-        data:matches
-
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Population (millions)'
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>'
+    },
+    series: [{
+        name: 'Population',
+        data: obj,
+        dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            format: '{point.y:.1f}', // one decimal
+            y: 10, // 10 pixels down from the top
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
     }]
-});}
+});
