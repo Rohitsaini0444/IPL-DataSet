@@ -1,11 +1,12 @@
 var matches = require('./matches.json');
 
 var fs = require('fs');
-var obj = {
 
-};
 
 function winner(matches) {
+  var obj = {
+
+  };
   matches.forEach(element => {
     if (obj.hasOwnProperty(element.winner)) {
      
