@@ -1,37 +1,3 @@
-/* 
-var fs = require('fs');
-var matchData = require('./matches.json');
-
-
-function MatchesPlayed(matchData) {
-  var seasonWise = {};
-  matchData.forEach(element => {
-    var season = element.season;
-    if (seasonWise.hasOwnProperty(season))
-      seasonWise[season] = seasonWise[season] + 1;
-    else
-      seasonWise[season] = 1;
-  })
-
-  console.log(seasonWise);
-
-  var json = JSON.stringify(seasonWise);
-
-  fs.writeFileSync('problem1.json', json, 'utf8');
-
-
-  return seasonWise;
-};
-
-
-module.exports = {
-  
- matches: MatchesPlayed,
-
-
-} 
- */
-
 
 module.exports = {
 
