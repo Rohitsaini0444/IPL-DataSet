@@ -1,7 +1,7 @@
 
 
-$.getJSON('../problem3.json' , function(data){
- 
+$.getJSON('./iplData.json' , function(data){
+ data=data.extraRuns;
  var team  = Object.keys(data);
 
   var runs =  Object.values(data);

@@ -1,4 +1,4 @@
-var obj=[];
+/*var obj=[];
 $.getJSON('../problem1.json',function(data){
 
  obj = Object.entries( data);
@@ -52,16 +52,23 @@ Highcharts.chart('container', {
     }]
 });
 
-});
+});    
+
+*/
+
+$.getJSON('./iplData.json',function(data){
+    var obj=[];
+   data = data.matchesPlayed;
+ obj = Object.entries( data);
 Highcharts.chart('container', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'World\'s largest cities per 2017'
+        text: 'IPL Matches Per Year'
     },
     subtitle: {
-        text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+        text: 'Source: <a href="https://www.iplt20.com"/>IPL</a>'
     },
     xAxis: {
         type: 'category',
@@ -76,7 +83,7 @@ Highcharts.chart('container', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Population (millions)'
+            text: 'No. Of Matches'
         }
     },
     legend: {
@@ -101,4 +108,6 @@ Highcharts.chart('container', {
             }
         }
     }]
+});
+
 });

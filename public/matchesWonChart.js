@@ -1,10 +1,12 @@
 
-$.getJSON('../problem2.json', function (data) {
+$.getJSON('./iplData.json', function (data) {
     var obj = [];
     var years = [];
+    data = data.winnerTeams;
     obj = Object.entries(data);
 
-    $.getJSON('../problem1.json', function (data1) {
+    $.getJSON('./iplData.json', function (data1) {
+        data1=data1.matchesPlayed;
         years = (Object.keys(data1));
 
         var dataSeries = [];
@@ -18,14 +20,14 @@ $.getJSON('../problem2.json', function (data) {
                 else
                     arr[i] = 0;
             }
-            console.log(arr);
+            // console.log(arr);
            
             dataSeries.push({
                 name:element[0], data: arr
             })
             
         });
-        console.log(dataSeries);
+        // console.log(dataSeries);
 
         Highcharts.chart('container1', {
             chart: {

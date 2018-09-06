@@ -1,11 +1,13 @@
-var obj=[];
-$.getJSON('../problem4.json', function(data){
-   obj = data;
+
+$.getJSON('./iplData.json', function(data){
+  var obj=[];
+  data = data.economicalBowler;
+  obj=data;
    obj.forEach(element => {
        element[1]=parseFloat(element[1]);
        
    });
-   console.log(obj);
+
     Highcharts.chart('container3', {
         chart: {
           type: 'column'
