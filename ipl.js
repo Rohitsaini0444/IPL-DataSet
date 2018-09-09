@@ -1,126 +1,78 @@
-
 module.exports = {
 
   matchesPlayed: function (matchData) {
-    var seasonWise = {};
-    matchData.forEach(element => {
-      var season = element.season;
-      if (seasonWise.hasOwnProperty(season))
-        seasonWise[season] = seasonWise[season] + 1;
+    let seasonWise = matchData.reduce(function (output, current) {
+      if (output.hasOwnProperty(current.season))
+          output[current.season] = output[current.season] + 1;
       else
-        seasonWise[season] = 1;
-    });
+          output[current.season] = 1;
+      return output
+  }, {});
 
-    return seasonWise;        //  this function is returning Object  only
+      return seasonWise; //  this function is returning Object  only
   },
-
-
-
-
-
-
-
 
   winnerTeams: function (matches) {
-    var obj = {};
-    matches.forEach(element => {
-      if (obj.hasOwnProperty(element.winner)) {
-
-        if (obj[element.winner].hasOwnProperty(element.season))
-
-        {
-          obj[element.winner][element.season] = obj[element.winner][element.season] + 1;
-        } else {
-          obj[element.winner][element.season] = 1;
-        }
-
-      } else {
-        obj[element.winner] = {};
-        obj[element.winner][element.season] = 1;
+    let obj = matches.reduce(function (output, current) {
+      if (output.hasOwnProperty(current.winner)) {
+        if (output[current.winner].hasOwnProperty(current.season))
+           output[current.winner][current.season] = output[current.winner][current.season] + 1;
+        else 
+           output[current.winner][current.season] = 1;
       }
-
-
-
-    })
-    return obj;          // this function is returning Object  only
+     else {
+          output[current.winner] = {};
+          output[current.winner][current.season] = 1;
+     }
+      return output;
+    }, {});
+  
+      return obj; // this function is returning Object  only
   },
-
-
-
-
-
-
-
 
   extraRuns: function (deliveries) {
 
-    var extras = {};
-    deliveries.forEach(element => {
+    let extras = deliveries.filter(function (data) {
+      return (parseInt(data.match_id) >= 577 && parseInt(data.match_id) <= 636);
+    }).reduce(function (output, current) {
+    let ex = parseInt(current.extra_runs)
+      if (output.hasOwnProperty(current.bowling_team))
+          output[current.bowling_team] = output[current.bowling_team] + ex;
+      else
+          output[current.bowling_team] = ex;
+      return output;
+    }, {});
 
-      if (parseInt(element.match_id, 10) >= 577 && parseInt(element.match_id, 10) <= 636) {
-        var ex = parseInt(element.extra_runs, 10)
-        if (ex != 0) {
-
-          if (extras.hasOwnProperty(element.bowling_team))
-            extras[element.bowling_team] = extras[element.bowling_team] + ex;
-          else
-            extras[element.bowling_team] = ex;
-        }
-
-      }
-    });
-    return extras;   // this function is returning Object  only
-
+      return extras; // this function is returning Object  only
   },
 
-
-
-
-
-
-
   economicalBowler: function (deliveries) {
-    var bowlers = {};
-    deliveries.forEach(element => {
 
-      if (parseInt(element.match_id, 10) >= 518 && parseInt(element.match_id, 10) <= 576) {
-        var ex = parseInt(element.total_runs, 10)
-
-
-        if (bowlers.hasOwnProperty(element.bowler)) {
-
-          bowlers[element.bowler]['runs'] = bowlers[element.bowler]['runs'] + ex;
-          bowlers[element.bowler]['balls'] = bowlers[element.bowler]['balls'] + 1;
-        } else {
-          bowlers[element.bowler] = {
-            "runs": ex,
-            "balls": 1
-          }
-        }
+    let bowlers = deliveries.filter(function (data) {
+      return (parseInt(data.match_id) >= 518 && parseInt(data.match_id) <= 576);
+    }).reduce(function (output, current) {
+    let ex = parseInt(current.total_runs)
+      if (output.hasOwnProperty(current.bowler)) {
+         output[current.bowler]['runs'] = output[current.bowler]['runs'] + ex;
+         output[current.bowler]['balls'] = output[current.bowler]['balls'] + 1;
       }
+      else {
+         output[current.bowler] = {
+         "runs": ex,
+         "balls": 1
+         }
+      }
+      return output; 
+    }, {});
+    let keys= Object.keys(bowlers).reduce(function (output, current) {
+         output[current] = (bowlers[current].runs * 6 / bowlers[current].balls).toFixed(2);
+      return output;
+      },{})
+     let result= Object.entries(keys).sort(function(aa,bb){
+      return aa[1]-bb[1];
 
-    });
+    }).slice(0,10);
 
-
-    var result = {};
-    var arr = [];
-    arr = Object.entries(bowlers);
-    var economy_rate = 0;
-
-    arr.forEach(element => {
-
-      economy_rate = (element[1].runs * 6) / element[1].balls;
-
-      result[element[0]] = economy_rate.toFixed(2);
-
-
-    });
-
-    var entries = Object.entries(result);
-    var sortedData = entries.sort((a, b) => a[1] - b[1]);
-    sortedData = sortedData.slice(0, 10);
-    return sortedData;  // this function is returning array  only
-
+      return result; // this function is returning Array  only
   }
-
 }

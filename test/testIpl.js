@@ -1,6 +1,6 @@
  const assert= require('chai').assert;
 const ipl= require('../ipl.js');
-/*
+
 
 describe('matchesPlayed function',function () { 
         let matchesPlayed = ipl.matchesPlayed;
@@ -140,7 +140,7 @@ it('extraRuns shold return object',function () {
 }); 
 
 
-*/
+
 
 
 
@@ -177,7 +177,7 @@ it('economicalBowler function should return expected result for tested data ',fu
      },{ 'match_id':545 ,
          'bowler':'aman', 'total_runs':1
      }];
-    let result = [['aman',6],['alok',9],['raj',24]];
+    let result = [['aman','6'],['alok','9'],['raj','24']];
  console.log(economicalBowler(dummy_data))
 
      assert.deepEqual(economicalBowler(dummy_data),result);
