@@ -1,5 +1,5 @@
 
-$.getJSON('./iplData.json', function(data){
+$.getJSON('http://127.0.0.1:5500/public/JSON/iplData.json', function(data){
   var obj=[];
   data = data.economicalBowler;
   obj=data;

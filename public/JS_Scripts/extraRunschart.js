@@ -1,33 +1,31 @@
-
-
-$.getJSON('./iplData.json' , function(data){
- data=data.extraRuns;
- var team  = Object.keys(data);
- var runs =  Object.values(data);
-var chart = Highcharts.chart('container2', {
+$.getJSON('http://127.0.0.1:5500/public/JSON/iplData.json', function (data) {
+  data = data.extraRuns;
+  let team = Object.keys(data);
+  let runs = Object.values(data);
+  let chart = Highcharts.chart('container2', {
 
     title: {
       text: 'Extra Runs In 2016'
     },
-  
+
     subtitle: {
       text: 'Plain'
     },
-  
+
     xAxis: {
       categories: team
     },
-  
+
     series: [{
       type: 'column',
       colorByPoint: true,
       data: runs,
       showInLegend: false
     }]
-  
+
   });
-  
-  
+
+
   $('#plain').click(function () {
     chart.update({
       chart: {
@@ -39,7 +37,7 @@ var chart = Highcharts.chart('container2', {
       }
     });
   });
-  
+
   $('#inverted').click(function () {
     chart.update({
       chart: {
@@ -51,7 +49,7 @@ var chart = Highcharts.chart('container2', {
       }
     });
   });
-  
+
   $('#polar').click(function () {
     chart.update({
       chart: {
