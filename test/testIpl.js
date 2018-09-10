@@ -155,7 +155,7 @@ it('economicalBowler should be a function',function(){
 it('economicalBowler function should return expected result for tested data ',function(){
 
     let test_data = [];
-    let expected = {};
+    let expected = [];
     let dummy_data = [{
         'match_id':534 ,
        'bowler':'raj',
@@ -167,7 +167,11 @@ it('economicalBowler function should return expected result for tested data ',fu
      },{
         'match_id':534 ,
        'bowler':'raj',
-       'total_runs':5
+       'total_runs':1
+     },{
+        'match_id':534 ,
+       'bowler':'raj',
+       'total_runs':1
      },{
         'match_id':534 ,
        'bowler':'raj',
@@ -177,7 +181,7 @@ it('economicalBowler function should return expected result for tested data ',fu
      },{ 'match_id':545 ,
          'bowler':'aman', 'total_runs':1
      }];
-    let result = [['aman','6'],['alok','9'],['raj','24']];
+    let result = [['aman', '6.00'],['alok','9.00'],['raj','13.50']];
  console.log(economicalBowler(dummy_data))
 
      assert.deepEqual(economicalBowler(dummy_data),result);
@@ -187,7 +191,7 @@ it('economicalBowler function should return expected result for tested data ',fu
 });
 it('economicalBowler should return Array',function () {  
 
-    assert.isObject(economicalBowler([[],[]]));
+    assert.isArray(economicalBowler([[],[]]));
 });
 
 }); 

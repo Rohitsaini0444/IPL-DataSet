@@ -31,14 +31,14 @@ $.getJSON('http://127.0.0.1:5500/public/JSON/iplData.json', function(data){
         yAxis: {
           min: 0,
           title: {
-            text: 'Economical rate'
+            text: 'Economy Rate'
           }
         },
         legend: {
           enabled: false
         },
         tooltip: {
-          pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>'
+          pointFormat: 'Economy Rate: <b>{point.y:.1f} </b>'
         },
         series: [{
           name: 'Population',

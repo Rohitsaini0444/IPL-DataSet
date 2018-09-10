@@ -3,21 +3,22 @@ $.getJSON('http://127.0.0.1:5500/public/JSON/iplData.json', function (data) {
     years = Object.keys(data.matchesPlayed);
     let obj = [];
     obj = Object.entries(data.winnerTeams);
-    let dataSeries = [];
-    obj.forEach(element => {
+    let dataSeries = obj.reduce(function (output, current) {
         let arr = [];
         for (let i = 0; i < years.length; i++) {
-            if (element[1].hasOwnProperty(years[i]))
-                arr[i] = element[1][years[i]];
+            if (current[1].hasOwnProperty(years[i]))
+                arr[i] = current[1][years[i]];
             else
                 arr[i] = 0;
         }
-        dataSeries.push({
-            name: element[0],
+        output.push({
+            name: current[0],
             data: arr
-        })
+        });
+        return output;
+    }, []);
 
-    });
+   
     Highcharts.chart('container1', {
         chart: {
             type: 'bar'

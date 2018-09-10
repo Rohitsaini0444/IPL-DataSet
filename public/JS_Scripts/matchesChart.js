@@ -32,10 +32,10 @@ $.getJSON('http://127.0.0.1:5500/public/JSON/iplData.json', function (data) {
             enabled: false
         },
         tooltip: {
-            pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>'
+            pointFormat: 'No of Matches Played: <b>{point.y:.1f} </b>'
         },
         series: [{
-            name: 'Population',
+            name: 'IPL Matches',
             data: obj,
             dataLabels: {
                 enabled: true,
