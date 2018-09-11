@@ -1,0 +1,1 @@
+In this project i'm retrieving data from JSON files and calculating stats and floating on highcharts
